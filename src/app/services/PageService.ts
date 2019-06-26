@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export default class PageService {
-  PAGE_ENDPOINT = 'http://localhost:3000/api/websites/WID/pages'
+  PAGE_ENDPOINT = 'https://wbdv-node-server.herokuapp.com/api/websites/WID/pages'
 
   createPage = (wid, page) =>
     fetch(this.PAGE_ENDPOINT.replace('WID', wid), {
@@ -29,6 +29,12 @@ export default class PageService {
       headers: {
         'content-type': 'application/json'
       }
+    }).then(response => response.json())
+  }
+
+  deletePage(websiteId: string, pageId: string) {
+    fetch(this.PAGE_ENDPOINT.replace('WID', websiteId) + '/' + pageId, {
+      method: 'DELETE',
     }).then(response => response.json())
   }
 }
