@@ -51,9 +51,9 @@ import { PageColumnComponent } from './page-column/page-column.component';
     FormsModule
   ],
   providers: [
-    UserService,
-    WebsiteService,
-    PageService
+    {provide:WebsiteService,useClass:WebsiteService},
+    {provide:PageService,useClass:PageService},
+    {provide:UserService,useClass:UserService}
   ],
   bootstrap: [AppComponent]
 })
