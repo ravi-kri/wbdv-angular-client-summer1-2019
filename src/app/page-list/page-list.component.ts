@@ -14,6 +14,7 @@ export class PageListComponent implements OnInit {
 
   pages = []
   websiteId = ''
+  editing = false;
 
   ngOnInit() {
     this.router.params.subscribe(params =>
@@ -27,11 +28,25 @@ export class PageListComponent implements OnInit {
 
   appendPage() {
     const pageObj = {
+      _id:String(new Date().getUTCMilliseconds()),
       title: 'New Page'
     }
     this.service.createPage(this.websiteId, pageObj)
       .then(page => this.pages.push(pageObj))
       .catch(error => console.log(error))
 
+  }
+  setEditing = (page, editing) => {
+    page.editing = editing;
+    if (editing === false) {
+      this.service.updatePage(this.websiteId,page._id,page)
+    }
+  }
+  deletePage(page) {
+    console.log(page)
+    this.service.deletePage(this.websiteId,page._id)
+          const pageIndex = this.pages.indexOf(page);
+          this.pages.splice(pageIndex, 1)
+        
   }
 }

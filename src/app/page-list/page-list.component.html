@@ -1,14 +1,61 @@
-<ul class="list-group">
+<!-- <ul class="list-group">
   <li
     class="list-group-item" *ngFor="let page of pages">
     <a [routerLink]="'/websites/' + websiteId + '/pages/' + page._id">
       {{page.title}}
     </a>
+    <button>Edit</button>
+    <button (click)="deletePage(page)"
+        class="btn btn-danger">Delete</button>
   </li>
 </ul>
-<br/>
+<br/> -->
+
+<div class="list-group">
+    <p *ngFor="let page of pages" class="list-group-item">
+        <a [routerLink]="'/websites/' + websiteId + '/pages/' + page._id">
+       <span [hidden]="page.editing">{{page.title}}</span> </a>
+       <input
+         [(ngModel)]="page.title"
+         [hidden]="!page.editing"/>
+       <i [hidden]="page.editing"
+          (click)="setEditing(page, true)"
+          class="btn btn-warning">EDIT</i>
+       <i [hidden]="!page.editing"
+          (click)="setEditing(page, false)"
+          class="btn btn-success">OK</i>
+       <button (click)="deletePage(page)"
+          class="btn btn-danger">Delete</button>
+    </p>
+    
+  </div>
+  
 <button
   class="btn btn-primary"
   (click)="appendPage()">
   Add Page
 </button>
+<!-- 
+<h1>Websites</h1>
+<div class="list-group">
+  <p *ngFor="let website of websites" class="list-group-item">
+      <a [routerLink]="'/websites/' + website._id + '/pages'">
+     <span [hidden]="website.editing">{{website.title}}</span> </a>
+     <input
+       [(ngModel)]="website.title"
+       [hidden]="!website.editing"/>
+     <i [hidden]="website.editing"
+        (click)="setEditing(website, true)"
+        class="btn btn-warning">EDIT</i>
+     <i [hidden]="!website.editing"
+        (click)="setEditing(website, false)"
+        class="btn btn-success">OK</i>
+     <button (click)="deleteWebsite(website)"
+        class="btn btn-danger">Delete</button>
+  </p>
+  
+</div>
+<br/>
+<button (click)="createWebsite()" class="btn btn-success">
+  Create Website
+</button> -->
